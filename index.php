@@ -2,7 +2,7 @@
 
 include_once('src/_autoload.php');
 
-/* Data */
+/* Figure 1 */
 
 $edges = [
 	['A','C'],
@@ -13,6 +13,25 @@ $edges = [
 	['D','C'],
 	['D','E'],
 	['C','E']
+];
+
+$edges = new EdgeCollection($edges);
+
+echo implode('->', $edges->fleury('A')) . PHP_EOL;
+
+/* Figure 2 */
+
+$edges = [
+	['F','E'],
+	['F','D'],
+	['D','E'],
+	['D','C'],
+	['D','A'],
+	['A','C'],
+	['A','B'],
+	['B','C'],
+	['B','E'],
+	['E','C'],
 ];
 
 $edges = new EdgeCollection($edges);
