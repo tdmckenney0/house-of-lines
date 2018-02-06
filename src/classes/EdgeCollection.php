@@ -17,7 +17,7 @@ class EdgeCollection {
 
 		while(count($edges) > 0) {
 
-			$e = array_pop($edges); 
+			$e = array_pop($edges);  print_r($path); print_r($e); print_r($edges);
 
 			if(count($edges) == 0) {
 				$path[] = $current;
