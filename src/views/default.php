@@ -50,6 +50,5 @@
 				</div>
 			</div>
 		</div>
-		<pre><?php print_r($debug); ?></pre>
 	</body>
 </html>
