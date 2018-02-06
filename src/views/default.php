@@ -1,7 +1,7 @@
 <!doctype html>
 <html>
 	<head>
-		<?php ob_start(); $solution = new Solution(false); $debug = ob_get_clean(); ?>
+		<?php $solution = new Solution(!empty($_GET['allowCenter'])); ?>
 
 		<script src="vendor/twbs/bootstrap/dist/js/bootstrap.min.js" type="text/javascript"></script>
 		<link rel="stylesheet" href="vendor/twbs/bootstrap/dist/css/bootstrap.min.css" />
@@ -10,15 +10,22 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-3">
-					<figure class="figure">
-						<img src="src/views/img/fig1.jpg" class="figure-img img-fluid rounded" alt="figure 1">
-						<figcaption class="figure-caption">Figure 1</figcaption>
-					</figure>
+					<?php if(empty($_GET['allowCenter'])): ?>
+						<figure class="figure">
+							<img src="src/views/img/fig1.jpg" class="figure-img img-fluid rounded" alt="figure 1">
+							<figcaption class="figure-caption">Figure 1</figcaption>
+						</figure>
 
-					<figure class="figure">
-						<img src="src/views/img/fig2.jpg" class="figure-img img-fluid rounded" alt="figure 1">
-						<figcaption class="figure-caption">Figure 2</figcaption>
-					</figure>
+						<a class="btn btn-primary" href="?allowCenter=1" role="button">Show Solutions using Figure 2</a>
+					<?php else: ?>
+
+						<figure class="figure">
+							<img src="src/views/img/fig2.jpg" class="figure-img img-fluid rounded" alt="figure 1">
+							<figcaption class="figure-caption">Figure 2</figcaption>
+						</figure>
+
+						<a class="btn btn-primary" href="?allowCenter=0" role="button">Show Solutions using Figure 1</a>
+					<?php endif; ?>
 				</div>
 
 				<div class="col">
