@@ -29,6 +29,8 @@ class EdgeCollection {
 			}
 		}
 
+		// Logically, if there are no edges left...then this is a valid path. 
+
 		if (count($edges) == 0) {
 			$this->paths[] = $path;
 		}
