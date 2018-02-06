@@ -11,6 +11,14 @@ class EdgeCollection {
 		}
 	}
 
+	public function addUnique(array $path = []) {
+		$rev = array_reverse($path);
+
+		if(!in_array($path, $this->paths) && !in_array($rev, $this->paths)) {
+			$this->paths[] = $path;
+		}
+	}
+
 	public function paths($current = 'A', $edges = [], $path = []) {
 
 		if(empty($edges) && empty($path)) {
@@ -32,7 +40,7 @@ class EdgeCollection {
 		// Logically, if there are no edges left...then this is a valid path. 
 
 		if (count($edges) == 0) {
-			$this->paths[] = $path;
+			$this->addUnique($path);
 		}
 	}
 }
