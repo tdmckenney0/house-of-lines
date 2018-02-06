@@ -2,7 +2,7 @@
 
 class Solution {
 
-	public $path = [];
+	public $paths = [];
 	public $allowCenter = false; 
 	public $timeTaken = 0;
 
@@ -38,8 +38,12 @@ class Solution {
 
 		$time = -microtime(true);
 
-		$this->path = $edges->fleury('A');
+		foreach(range('A', ($this->allowCenter ? 'F' : 'E')) as $current) {
+			$edges->paths($current);
+		}
 
 		$this->timeTaken = $time + microtime(true);
+
+		$this->paths = $edges->paths;
 	}
 }

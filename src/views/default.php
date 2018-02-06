@@ -1,7 +1,7 @@
 <!doctype html>
 <html>
 	<head>
-		<?php ob_start(); $solutions[] = new Solution(false); ob_end_clean(); ?>
+		<?php ob_start(); $solution = new Solution(false); $debug = ob_get_clean(); ?>
 
 		<script src="vendor/twbs/bootstrap/dist/js/bootstrap.min.js" type="text/javascript"></script>
 		<link rel="stylesheet" href="vendor/twbs/bootstrap/dist/css/bootstrap.min.css" />
@@ -23,22 +23,19 @@
 
 				<div class="col">
 					<h1 class="display-1">House of Lines</h1>
+					<div class="alert alert-info" role="alert">Time Taken: <?php echo floor($solution->timeTaken * 1000000); ?>μs</div>
 					<table class="table">
 						<thead>
 							<tr>
 								<th>Solution #</th>
 								<th>Path</th>
-								<th>Allow Center Pivot?</th>
-								<th>Time Taken (μs)</th>
 							</tr>
 						</thead>
 						<tbody>
-							<?php foreach($solutions as $solution): ?>
+							<?php foreach($solution->paths as $key => $path): ?>
 								<tr>
-									<td>1</td>
-									<td><?php echo implode('->', $solution->path); ?></td>
-									<td><?php echo ($solution->allowCenter ? 'Yes' : 'No'); ?></td>
-									<td><?php echo floor($solution->timeTaken * 1000000); ?>μs</td>
+									<td><?php echo ($key + 1); ?></td>
+									<td><?php echo implode('->', $path); ?></td>
 								</tr>
 							<?php endforeach; ?>
 						</tbody>
@@ -46,5 +43,6 @@
 				</div>
 			</div>
 		</div>
+		<pre><?php print_r($debug); ?></pre>
 	</body>
 </html>

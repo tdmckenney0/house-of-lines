@@ -3,6 +3,7 @@
 class EdgeCollection {
 
 	public $collection = [];
+	public $paths = [];
 
 	public function __construct(array $data = []) {
 		foreach ($data as $edge) {
@@ -10,43 +11,26 @@ class EdgeCollection {
 		}
 	}
 
-	public function fleury($current = 'A') {
-		
-		$edges = $this->collection;
-		$path = [];
+	public function paths($current = 'A', $edges = [], $path = []) {
 
-		while(count($edges) > 0) {
-
-			$e = array_pop($edges);  print_r($path); print_r($e); print_r($edges);
-
-			if(count($edges) == 0) {
-				$path[] = $current;
-				$path[] = $e->nextVertex($current);
-				break;
-			}
-			
-			if($e->hasVertex($current)) {
-
-				$v = $e->nextVertex($current); 
-				$good = false;
-
-				foreach($edges as $next) {
-					if($next->hasVertex($v)) {
-						$good = true;
-						break;
-					}
-				}
-
-				if(!empty($good)) {
-					$path[] = $current; 
-					$current = $v;
-					continue;
-				}
-			}
-
-			array_unshift($edges, $e);
+		if(empty($edges) && empty($path)) {
+			$edges = $this->collection;
 		}
 
-		return $path;
+		$path[] = $current;
+
+		foreach($edges as $key => $edge) {
+			if($edge->hasVertex($current)) { 
+
+				$_edges = $edges;
+				unset($_edges[$key]);
+
+				$this->paths($edge->nextVertex($current), $_edges, $path);
+			}
+		}
+
+		if (count($edges) == 0) {
+			$this->paths[] = $path;
+		}
 	}
 }
